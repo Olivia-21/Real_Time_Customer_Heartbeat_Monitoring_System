@@ -1,0 +1,1 @@
+As a junior data engineer, I want to perform the task in task.md. Make the code production ready and efficient. I will use docker container to run the application. Make the application robust, Idempotent, durable and fault tolerant. 
