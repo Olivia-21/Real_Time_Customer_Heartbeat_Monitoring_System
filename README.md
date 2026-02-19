@@ -1,10 +1,10 @@
-# 💓 Real-Time Customer Heartbeat Monitoring System
+#  Real-Time Customer Heartbeat Monitoring System
 
 A production-ready, fault-tolerant data pipeline that **simulates**, **streams**, **validates**, **stores**, and **visualises** real-time heart-rate sensor data using **Apache Kafka**, **PostgreSQL**, and **Streamlit** — all orchestrated with **Docker Compose**.
 
 ---
 
-## 📐 System Architecture
+##  System Architecture
 
 ```
 ┌──────────────────────────────────────────────────────────────────────┐
@@ -42,7 +42,7 @@ A production-ready, fault-tolerant data pipeline that **simulates**, **streams**
 
 ---
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Prerequisites
 
@@ -100,7 +100,7 @@ docker compose down -v
 
 ---
 
-## 🗄️ PostgreSQL Schema
+##  PostgreSQL Schema
 
 ```sql
 -- Time-series readings table
@@ -151,7 +151,7 @@ docker exec -it postgres psql -U heartbeat_user -d heartbeat_db
 
 ---
 
-## ⚙️ Configuration
+##  Configuration
 
 All services are configured via environment variables in `docker-compose.yml`.
 
@@ -166,7 +166,7 @@ All services are configured via environment variables in `docker-compose.yml`.
 
 ---
 
-## 🔒 Production Design Decisions
+##  Production Design Decisions
 
 | Property | Implementation |
 |----------|---------------|
@@ -180,7 +180,7 @@ All services are configured via environment variables in `docker-compose.yml`.
 
 ---
 
-## 🧪 Running Tests
+##  Running Tests
 
 Install test dependencies locally:
 
@@ -240,7 +240,7 @@ DEM10_Lab/
 
 ---
 
-## 🩺 Troubleshooting
+##  Troubleshooting
 
 | Problem | Solution |
 |---------|----------|
