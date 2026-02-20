@@ -65,12 +65,18 @@ st.markdown(
     .kpi-card {
         background: linear-gradient(135deg, #1e1e2e, #2a2a3e);
         border-radius: 12px;
-        padding: 1.2rem 1.5rem;
+        padding: 1.2rem 1rem;
         text-align: center;
         border: 1px solid #3a3a5e;
+        min-height: 120px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-sizing: border-box;
     }
-    .kpi-value { font-size: 2.4rem; font-weight: 700; color: #a6e3a1; margin: 0; }
-    .kpi-label { font-size: 0.85rem; color: #cdd6f4; margin: 0; text-transform: uppercase; letter-spacing: 0.08em; }
+    .kpi-value { font-size: 2rem; font-weight: 700; color: #a6e3a1; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .kpi-value-sm { font-size: 1.3rem; font-weight: 700; color: #a6e3a1; margin: 0; line-height: 1.4; }
+    .kpi-label { font-size: 0.85rem; color: #cdd6f4; margin: 0.3rem 0 0 0; text-transform: uppercase; letter-spacing: 0.08em; }
     .anomaly-badge { color: #f38ba8; font-weight: 600; }
     </style>
     """,
@@ -108,13 +114,25 @@ def render_dashboard():
         (c1, "Total Readings",    row.get("total_readings", 0),    ""),
         (c2, "Unique Customers",  row.get("unique_customers", 0),   ""),
         (c3, "Anomaly Rate",      row.get("anomaly_rate_pct", 0.0), "%"),
-        (c4, "Last Reading",      str(row.get("last_seen", "—"))[:19], ""),
     ]:
         col.markdown(
             f'<div class="kpi-card"><p class="kpi-value">{value}{unit}</p>'
             f'<p class="kpi-label">{label}</p></div>',
             unsafe_allow_html=True,
         )
+
+    # Last Reading card – split date and time onto two lines with smaller font
+    last_seen_str = str(row.get("last_seen", "—"))[:19]
+    if "T" in last_seen_str or " " in last_seen_str:
+        sep = "T" if "T" in last_seen_str else " "
+        date_part, time_part = last_seen_str.split(sep, 1)
+    else:
+        date_part, time_part = last_seen_str, ""
+    c4.markdown(
+        f'<div class="kpi-card"><p class="kpi-value-sm">{date_part}<br>{time_part}</p>'
+        f'<p class="kpi-label">Last Reading</p></div>',
+        unsafe_allow_html=True,
+    )
 
     st.markdown("---")
 

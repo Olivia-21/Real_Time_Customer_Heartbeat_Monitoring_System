@@ -8,6 +8,7 @@ volumes:
   postgres_data:
   kafka_data:
 
+
 services:
   # ─────────────────────────────────────────────
   # Zookeeper – Kafka coordinator
@@ -20,7 +21,7 @@ services:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
     healthcheck:
-      test: ["CMD", "bash", "-c", "echo ruok | nc localhost 2181"]
+      test: [ "CMD", "bash", "-c", "echo ruok | nc localhost 2181" ]
       interval: 10s
       timeout: 5s
       retries: 10
@@ -49,13 +50,7 @@ services:
     volumes:
       - kafka_data:/var/lib/kafka/data
     healthcheck:
-      test:
-        [
-          "CMD",
-          "kafka-broker-api-versions",
-          "--bootstrap-server",
-          "localhost:9092",
-        ]
+      test: [ "CMD", "kafka-broker-api-versions", "--bootstrap-server", "localhost:9092" ]
       interval: 15s
       timeout: 10s
       retries: 10
@@ -77,12 +72,12 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U heartbeat_user -d heartbeat_db"]
+      test: [ "CMD-SHELL", "pg_isready -U heartbeat_user -d heartbeat_db" ]
       interval: 10s
       timeout: 5s
       retries: 10
     ports:
-      - "5432:5432"
+      - "5433:5432"
     networks:
       - heartbeat_net
 
